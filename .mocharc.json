@@ -1,0 +1,4 @@
+{
+  "timeout": "3000",
+  "watch-files": ["src/**/*.spec.js", "test/**/*.spec.js"]
+}
