@@ -10,7 +10,7 @@ export class Employee {
     this.callHandler = handler;
   }
 
-	/* Start the conversation */
+  /* Start the conversation */
   receiveCall(call) {
     this.currentCall = call;
 

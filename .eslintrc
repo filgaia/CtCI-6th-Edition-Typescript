@@ -24,8 +24,9 @@
     "browser": true,
     "mocha": true
   },
-  "ecmaFeatures": {
-    "modules": true
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
   },
   "extends": "eslint:recommended"
 }
