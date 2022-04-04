@@ -39,3 +39,7 @@ This implementation of the solutions requires the following dependencies:
 * Chai (installed via npm)
 * Babel (installed via npm)
 * Typescript (installed via npm)
+
+### References
+
+- [Book website](https://www.crackingthecodinginterview.com/)

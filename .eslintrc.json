@@ -38,7 +38,7 @@
     "consistent-return": "off",
     "default-case": "off",
     "eqeqeq": 2,
-    "func-names": "off", // Remove
+    "func-names": "off", // Remove to warn
     "guard-for-in": "off",
     "import/prefer-default-export": "off",
     "max-classes-per-file": "off",
