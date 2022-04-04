@@ -36,10 +36,10 @@ export function hasUniqueCharactersSet(str) {
  */
 export function hasUniqueCharactersSort(str) {
   // sort string using quicksort
-  str.sort();
+  const sortStrArr = str.split('').sort();
 
-  for (var i = 1; i < str.length; ++i) {
-    if (str[i] === str[i - 1]) {
+  for (let i = 1; i < sortStrArr.length; ++i) {
+    if (sortStrArr[i] === sortStrArr[i - 1]) {
       return false;
     }
   }
