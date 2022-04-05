@@ -11,7 +11,7 @@
  * @return {boolean}      True if input string is a permutation of
  *                        a palindrome (ignoring spaces), otherwise false
  */
-export function isPalindromePermutationsSet(str: string) {
+export function isPalindromePermutationsSet(str: string): boolean {
   if (!str) {
     return false;
   }
@@ -46,7 +46,7 @@ export function isPalindromePermutationsSet(str: string) {
  *                        of a palindrome (ignoring spaces), otherwise false
  */
 
-export function isPalindromePermutationsBit(str: string) {
+export function isPalindromePermutationsBit(str: string): boolean {
   if (!str) {
     return false;
   }

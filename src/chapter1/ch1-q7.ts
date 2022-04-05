@@ -11,7 +11,7 @@
  * @param  {array} matrix NxN matrix to rotate in place
  * @return {array}        Rotated matrix, same object as input
  */
-export function rotateMatrix(matrix: any) {
+export function rotateMatrix(matrix: number[][]): number[][] {
   if (!matrix || matrix.length === 0 || matrix.length !== matrix[0].length) {
     throw new Error('invalid matrix');
   }

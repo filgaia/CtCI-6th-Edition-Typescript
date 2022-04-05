@@ -1,6 +1,6 @@
 /**
  * Takes an input string and counts contiguous sequences of the same character
- * and replaces them with XC (X = count, C = character).
+ * and replaces them with CX (X = count, C = character).
  *
  * N = |str|
  * Time: O(N)
@@ -9,7 +9,7 @@
  * @param  {string} str The given string
  * @return {string}     The compressed string or the original string
  */
-export function compressString(str: string) {
+export function compressString(str: string): string {
   if (!str) {
     return str;
   }
@@ -33,7 +33,7 @@ export function compressString(str: string) {
 
 /**
  * Takes an input string and counts contiguous sequences of the same character
- * and replaces them with XC (X = count, C = character).
+ * and replaces them with CX (X = count, C = character).
  *
  * It runs a first pass through the string to determine the compression length.
  * If the compression length is not smaller than current length, we can just
@@ -46,7 +46,7 @@ export function compressString(str: string) {
  * @param  {string} str The given string
  * @return {string}     The compressed string or the original string
  */
-export function compressStringOnlyIfNecessary(str: string) {
+export function compressStringOnlyIfNecessary(str: string): string {
   if (!str) {
     return str;
   }
@@ -57,7 +57,7 @@ export function compressStringOnlyIfNecessary(str: string) {
     : str;
 }
 
-function getCompressionLength(str: string) {
+function getCompressionLength(str: string): number {
   let compressedLength = 0;
   let countConsecutive = 0;
   for (let i = 0; i < str.length; ++i) {
@@ -71,7 +71,7 @@ function getCompressionLength(str: string) {
   return compressedLength;
 }
 
-function compressStringOnlyIfNecessaryHelper(str: string) {
+function compressStringOnlyIfNecessaryHelper(str: string): string {
   let compressed = '';
   for (let i = 0; i < str.length; ++i) {
     const char = str[i];

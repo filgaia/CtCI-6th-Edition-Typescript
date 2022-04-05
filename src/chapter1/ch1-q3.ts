@@ -9,7 +9,7 @@
  * @param  {string[]} url URL string as a character arra which will be updated in place
  * @return {string[]}     Updated URL character array
  */
-export function encodeSpaces(url: any) {
+export function encodeSpaces(url: string[]): string[] {
   if (!url || url.length === 0) {
     return url;
   }

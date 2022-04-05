@@ -11,7 +11,7 @@
  * @param  {string[]} str1 Second string, passed in as a character array
  * @return {boolean}       True if first and second strings are permutations otherwise false
  */
-export function isPermutationMap(str1: string, str2: string) {
+export function isPermutationMap(str1: string, str2: string): boolean {
   if (str1.length === 0 || str1.length !== str2.length) {
     return false;
   }
@@ -23,8 +23,12 @@ export function isPermutationMap(str1: string, str2: string) {
   }
 
   for (const ch of str2) {
-    if (!chars.has(ch)) return false; // shortcircuit if a char doesn't exist in both strings
+    if (!chars.has(ch)) {
+      return false; // shortcircuit if a char doesn't exist in both strings
+    }
+
     const nextCount = chars.get(ch) - 1;
+
     if (nextCount === 0) {
       chars.delete(ch);
     } else {
@@ -47,7 +51,11 @@ export function isPermutationMap(str1: string, str2: string) {
  * @param  {string[]} str1 Second string, passed in as a character array
  * @return {boolean}       True if first and second strings are permutations otherwise false
  */
-export function isPermutationSorted(str1: string, str2: string) {
+export function isPermutationSorted(str1: string, str2: string): boolean {
+  // for the purposes of the question,
+  // ignore array creation and assume O(1) space sort as with arrays
+  const sortString = (str: string) => Array.from(str).sort();
+
   if (str1.length === 0 || str1.length !== str2.length) {
     return false;
   }
@@ -56,9 +64,4 @@ export function isPermutationSorted(str1: string, str2: string) {
   const sorted2 = sortString(str2);
 
   return sorted1.every((v, i) => v === sorted2[i]);
-}
-
-// for the purposes of the question, ignore array creation and assume O(1) space sort as with arrays
-function sortString(str: string) {
-  return Array.from(str).sort();
 }

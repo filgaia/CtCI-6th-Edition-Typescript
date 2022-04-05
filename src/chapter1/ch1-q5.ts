@@ -14,7 +14,7 @@
  * @param  {string}  str2 The second string
  * @return {boolean}      True if strings are 0 or 1 edit apart, otherwise false
  */
-export function isOneOrLessAway(str1: string, str2: string) {
+export function isOneOrLessAway(str1: string, str2: string): boolean {
   // if lengths differ by more than 1 then can't be true
   if (Math.abs(str1.length - str2.length) > 1) {
     return false;

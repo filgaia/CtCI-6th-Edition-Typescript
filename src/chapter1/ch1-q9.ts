@@ -11,7 +11,7 @@
  * @param  {string}  str2   String to check if it is a rotated version of str1
  * @return {boolean}        True if str1 and str2 are rotated versions of eachother, otherwise false
  */
-export function isRotatedSubstring(str1: string, str2: string) {
+export function isRotatedSubstring(str1: string, str2: string): boolean {
   if (!str1 || !str2) {
     throw new Error('invalid input');
   }
@@ -23,6 +23,6 @@ export function isRotatedSubstring(str1: string, str2: string) {
 
 // Implementation of isSubstring function which is defined in question
 // can only be called once
-function isSubstring(str: string, substr: string) {
+function isSubstring(str: string, substr: string): boolean {
   return str.includes(substr);
 }

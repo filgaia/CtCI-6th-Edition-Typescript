@@ -12,7 +12,7 @@
  * @param  {array} matrix Matrix to be zeroed in-place
  * @return {array}        Matrix that has been zeroed, same object as input
  */
-export function zeroMatrix(matrix: any) {
+export function zeroMatrix(matrix: number[][]): number[][] {
   if (!Array.isArray(matrix) || !Array.isArray(matrix[0])) {
     throw new Error('invalid matrix');
   }
@@ -20,8 +20,8 @@ export function zeroMatrix(matrix: any) {
     return matrix;
   }
 
-  const rows = new Array(matrix.length);
-  const cols = new Array(matrix[0].length);
+  const rows: boolean[] = new Array(matrix.length);
+  const cols: boolean[] = new Array(matrix[0].length);
 
   rows.fill(false);
   cols.fill(false);
@@ -58,7 +58,7 @@ export function zeroMatrix(matrix: any) {
  * @param  {array} matrix Matrix to be zeroed in-place
  * @return {array}        Matrix that has been zeroed, same object as input
  */
-export function zeroMatrixConstantSpace(matrix: any) {
+export function zeroMatrixConstantSpace(matrix: number[][]): number[][] {
   if (!Array.isArray(matrix) || !Array.isArray(matrix[0])) {
     throw new Error('invalid matrix');
   }
@@ -86,8 +86,8 @@ export function zeroMatrixConstantSpace(matrix: any) {
 
   // check for zeros in the rest of the rows/cols and update
   // first row/column storage accordingly
-  for (let row = 0; row < matrix.length; row++) {
-    for (let col = 0; col < matrix[0].length; col++) {
+  for (let row = 1; row < matrix.length; row++) {
+    for (let col = 1; col < matrix[0].length; col++) {
       if (matrix[row][col] === 0) {
         matrix[row][0] = 0;
         matrix[0][col] = 0;
@@ -122,19 +122,19 @@ export function zeroMatrixConstantSpace(matrix: any) {
   return matrix;
 }
 
-function nullifyRow(matrix: any, row: number) {
+function nullifyRow(matrix: number[][], row: number): void {
   for (let col = 0; col < matrix[row].length; col++) {
     matrix[row][col] = 0;
   }
 }
 
-function nullifyCol(matrix: any, col: number) {
+function nullifyCol(matrix: number[][], col: number): void {
   for (let row = 0; row < matrix.length; row++) {
     matrix[row][col] = 0;
   }
 }
 
-/** 2nd Solution
+/**
  * Do a first pass through the matrix to find which cells have 0's. When a 0 is
  * found then mark it in the first column and row. Then check the first row to
  * see which columns to zero out. Repeat the process for the first column to
@@ -149,7 +149,7 @@ function nullifyCol(matrix: any, col: number) {
  * @return {array}        Matrix that has been zeroed, same object as input
  */
 
-export const zeroMatrixConstantSpaceAlt = (matrix: any) => {
+export const zeroMatrixConstantSpaceAlt = (matrix: number[][]): number[][] => {
   const rows = matrix.length;
   const cols = matrix[0].length;
 
