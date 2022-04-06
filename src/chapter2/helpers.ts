@@ -1,6 +1,8 @@
-export function linkedListToArray(list: any) {
+import { LinkedList, LinkedListNode } from './ch2-models';
+
+export function linkedListToArray(list: LinkedListNode | null): number[] {
   const arr = [];
-  let node = list;
+  let node: LinkedListNode | null = list;
 
   while (node !== null) {
     arr.push(node.val);
@@ -10,14 +12,14 @@ export function linkedListToArray(list: any) {
   return arr;
 }
 
-export function createNode(val: any, next: any) {
+export function createNode(val: number, next?: LinkedListNode | null): LinkedListNode {
   return {
     val,
     next: next || null,
   };
 }
 
-export function arrayToLinkedList(arr: []) {
+export function arrayToLinkedList(arr: number[]): LinkedListNode | null {
   if (arr.length === 0) {
     return null;
   }
@@ -30,7 +32,7 @@ export function arrayToLinkedList(arr: []) {
   return list;
 }
 
-export function getLength(list: any) {
+export function getLength(list: any): number {
   let length = 0;
   while (list) {
     list = list.next;
@@ -39,14 +41,14 @@ export function getLength(list: any) {
   return length;
 }
 
-export function createLinkedList() {
+export function createLinkedList(): LinkedList {
   return {
     head: null,
     tail: null,
   };
 }
 
-export function pushSingle(list: any, value: any) {
+export function pushSingle(list: any, value: any): void {
   const node = createNode(value, null);
   if (list.head) {
     list.tail.next = node;
@@ -57,7 +59,7 @@ export function pushSingle(list: any, value: any) {
   }
 }
 
-export function push(list: any) {
+export function push(list: any): void {
   for (let i = 1; i < arguments.length; ++i) {
     pushSingle(list, arguments[i]);
   }

@@ -5,12 +5,7 @@ for (const key in funcs) {
   const func = funcs[key];
 
   describe(`ch1-q1: ${key}`, () => {
-    [
-      'abcdefghi',
-      'jklpoiuqwerzxcvmnsadf',
-      '1234567890',
-      'AaBbCcDdeFg1234567890(*&^%$#@!)',
-    ].forEach((arg) => {
+    ['abcdefghi', 'jklpoiuqwerzxcvmnsadf', '1234567890', 'abcdefg1234567890(*)'].forEach((arg) => {
       it(`returns true for unique string: '${arg}'`, () => {
         expect(func(arg.split(''))).to.be.true;
       });

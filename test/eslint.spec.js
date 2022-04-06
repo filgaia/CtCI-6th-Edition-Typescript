@@ -10,6 +10,7 @@ const paths = [
 // Specify style of output
 const options = {
   formatter: 'compact',
+  timeout: 10000,
 };
 
 // Only display warnings if a test is failing

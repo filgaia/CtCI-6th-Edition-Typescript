@@ -1,4 +1,5 @@
 {
-  "timeout": "5000",
-  "watch-files": ["src/**/*.spec.js", "test/**/*.spec.js"]
+  "recursive": true,
+  "timeout": "10000",
+  "spec": ["test/**/*.spec.js", "src/**/*.spec.ts"]
 }
