@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import * as helpers from './helpers';
 import * as funcs from './ch2-q3';
+import { LinkedListNode } from './ch2-models';
 
 for (const key in funcs) {
   const func = funcs[key];
@@ -51,7 +52,7 @@ for (const key in funcs) {
     ].forEach((context) => {
       it(`removing node ${context.node} from list ${context.list}`, () => {
         const list = helpers.arrayToLinkedList(context.list);
-        let node = list;
+        let node: LinkedListNode | null | undefined = list;
         for (let i = 0; i < context.node; ++i) {
           node = node?.next;
         }

@@ -13,8 +13,12 @@ for (const key in funcs) {
 
     it('throws an error if list is shorter than k', () => {
       expect(() => func(helpers.arrayToLinkedList([1]), 1)).to.throw('list is not long enough');
-      expect(() => func(helpers.arrayToLinkedList([1, 2, 3]), 3)).to.throw('list is not long enough');
-      expect(() => func(helpers.arrayToLinkedList([1, 2, 3]), 4)).to.throw('list is not long enough');
+      expect(() => func(helpers.arrayToLinkedList([1, 2, 3]), 3)).to.throw(
+        'list is not long enough',
+      );
+      expect(() => func(helpers.arrayToLinkedList([1, 2, 3]), 4)).to.throw(
+        'list is not long enough',
+      );
     });
 
     [

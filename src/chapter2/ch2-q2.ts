@@ -1,3 +1,4 @@
+import { LinkedListNode } from './ch2-models';
 import { getLength } from './helpers';
 
 /**
@@ -10,13 +11,13 @@ import { getLength } from './helpers';
  * Time: O(N)
  * Additional space: O(1)
  */
-export function kthToLastTwoPointers(list: any, k: number) {
+export function kthToLastTwoPointers(list: LinkedListNode, k: number): number | undefined {
   if (!list) {
     throw new Error('invalid list');
   }
 
-  let last = list;
-  let kth = list;
+  let last: LinkedListNode | null = list;
+  let kth: LinkedListNode | null | undefined = list;
 
   for (let i = 0; i < k; ++i) {
     last = last.next;
@@ -27,10 +28,10 @@ export function kthToLastTwoPointers(list: any, k: number) {
 
   while (last.next) {
     last = last.next;
-    kth = kth.next;
+    kth = kth?.next;
   }
 
-  return kth.val;
+  return kth?.val;
 }
 
 /**
@@ -42,22 +43,22 @@ export function kthToLastTwoPointers(list: any, k: number) {
  * Time: O(N)
  * Additional space: O(1)
  */
-export function kthToLastLength(list: any, k: number) {
+export function kthToLastLength(list: LinkedListNode, k: number): number | undefined {
   if (!list) {
     throw new Error('invalid list');
   }
 
   const len = getLength(list);
   const skip = len - k;
-  let node = list;
+  let node: LinkedListNode | null | undefined = list;
 
   if (skip <= 0) {
     throw new Error('list is not long enough');
   }
 
   for (let i = 1; i < skip; ++i) {
-    node = node.next;
+    node = node?.next;
   }
 
-  return node.val;
+  return node?.val;
 }
