@@ -1,3 +1,5 @@
+import { MinStackItem } from './ch3-models';
+
 /**
  * MinStack maintains a current stack minimum by putting an object on the stack
  * that holds the value and the minimum at that time rather than just the value.
@@ -10,13 +12,13 @@
  * that point.
  */
 export class MinStack {
-  private _stack: any[];
+  private _stack: MinStackItem[];
 
   constructor() {
     this._stack = [];
   }
 
-  push(value: any) {
+  push(value: number): void {
     const min: any = this.min();
     this._stack.push({
       value,
@@ -24,28 +26,28 @@ export class MinStack {
     });
   }
 
-  pop() {
+  pop(): number | undefined {
     if (!this.isEmpty()) {
       const item = this._stack.pop();
-      return item.value;
+      return item?.value;
     }
   }
 
-  peek() {
+  peek(): number | undefined {
     if (!this.isEmpty()) {
       const item = this._stack[this._stack.length - 1];
       return item.value;
     }
   }
 
-  min() {
+  min(): number | undefined {
     if (!this.isEmpty()) {
       const item = this._stack[this._stack.length - 1];
       return item.min;
     }
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this._stack.length === 0;
   }
 }

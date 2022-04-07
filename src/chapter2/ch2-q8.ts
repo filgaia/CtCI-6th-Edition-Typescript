@@ -1,3 +1,5 @@
+import { LinkedListNode } from './ch2-models';
+
 /**
  * This algorithm simply stores each node it sees into a Set structure, if there
  * is a cycle then the first repeat we see will be the start of that cycle and
@@ -7,7 +9,7 @@
  * Time: O(N) - assumes Set is hashmap based so O(1) costs
  * Additional space: O(N)
  */
-export function findStartOfLoopSet(list: any) {
+export function findStartOfLoopSet(list: LinkedListNode | null): LinkedListNode | null {
   const visited = new Set();
   let node = list;
 
@@ -35,13 +37,13 @@ export function findStartOfLoopSet(list: any) {
  * Time: O(N)
  * Additional space: O(1)
  */
-export function findStartOfLoop(list: any) {
+export function findStartOfLoop(list: LinkedListNode): LinkedListNode | null {
   if (!list) {
     return null;
   }
 
-  let slow = list;
-  let fast = list;
+  let slow: LinkedListNode | null = list;
+  let fast: LinkedListNode | null = list;
 
   while (slow.next && fast.next && fast.next.next) {
     slow = slow.next;
@@ -51,14 +53,15 @@ export function findStartOfLoop(list: any) {
     }
   }
 
-  if (!slow || slow !== fast) { // no loop
+  if (!slow || slow !== fast) {
+    // no loop
     return null;
   }
 
   slow = list;
   while (slow !== fast) {
-    slow = slow.next;
-    fast = fast.next;
+    slow = slow?.next || null;
+    fast = fast?.next || null;
   }
 
   return fast;

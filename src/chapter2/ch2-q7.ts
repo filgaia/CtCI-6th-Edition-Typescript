@@ -1,3 +1,4 @@
+import { LinkedListNode } from './ch2-models';
 import { getLength } from './helpers';
 
 /**
@@ -12,7 +13,10 @@ import { getLength } from './helpers';
  * Time: O(N)
  * Additional space: O(1)
  */
-export function doIntersect(list1: any, list2: any) {
+export function doIntersect(
+  list1: LinkedListNode | null,
+  list2: LinkedListNode | null,
+): LinkedListNode | undefined {
   const len1 = getLength(list1);
   const len2 = getLength(list2);
 
@@ -32,9 +36,9 @@ export function doIntersect(list1: any, list2: any) {
   return undefined;
 }
 
-function skip(list: any, num: number) {
+function skip(list: LinkedListNode | null, num: number) {
   while (num > 0) {
-    list = list.next;
+    list = list?.next || null;
     --num;
   }
   return list;

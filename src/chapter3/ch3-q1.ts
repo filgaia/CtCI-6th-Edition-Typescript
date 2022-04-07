@@ -10,7 +10,7 @@
  * Additional space: push O(1), pop O(1), peek O(1)
  */
 export class TripleStack {
-  private _array: any;
+  private _array: (number | undefined)[];
 
   private _lengths: number[];
 
@@ -19,17 +19,17 @@ export class TripleStack {
     this._lengths = [0, 0, 0];
   }
 
-  _getLength(stack: any) {
+  _getLength(stack: number): number {
     return this._lengths[stack - 1];
   }
 
-  push(stack: any, value: any) {
+  push(stack: number, value: number): void {
     const idx = this._getLength(stack) * 3 + stack - 1;
     this._array[idx] = value;
     ++this._lengths[stack - 1];
   }
 
-  pop(stack: any) {
+  pop(stack: number): number | undefined {
     const length = this._getLength(stack);
     let value;
     if (length > 0) {
@@ -41,7 +41,7 @@ export class TripleStack {
     return value;
   }
 
-  peek(stack: any) {
+  peek(stack: number): number | undefined {
     const length = this._getLength(stack);
     let value;
     if (length > 0) {
@@ -51,7 +51,7 @@ export class TripleStack {
     return value;
   }
 
-  isEmpty(stack: any) {
+  isEmpty(stack: number): boolean {
     return this._getLength(stack) === 0;
   }
 }

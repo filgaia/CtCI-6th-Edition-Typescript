@@ -1,4 +1,5 @@
-import { getLength } from './helpers';
+import { LinkedListNode } from './ch2-models';
+import { getLength, reverse } from './helpers';
 
 /**
  * First find out the length of the list, then walk through half of the list
@@ -11,7 +12,7 @@ import { getLength } from './helpers';
  * Time: O(N)
  * Additional space: O(N)
  */
-export function isPalindromeStack(list: any) {
+export function isPalindromeStack(list: LinkedListNode | null): boolean {
   const length = getLength(list);
 
   if (length <= 1) {
@@ -21,12 +22,12 @@ export function isPalindromeStack(list: any) {
   const stack = [];
   let node = list;
   for (let i = Math.floor(length / 2); i > 0; --i) {
-    stack.push(node.val);
-    node = node.next;
+    stack.push(node?.val);
+    node = node?.next || null;
   }
 
-  if ((length % 2) === 1) {
-    node = node.next;
+  if (length % 2 === 1) {
+    node = node?.next || null;
   }
 
   while (node) {
@@ -54,7 +55,7 @@ export function isPalindromeStack(list: any) {
  * Time: O(N)
  * Additional space: O(1)
  */
-export function isPalindromeReverse(list: any) {
+export function isPalindromeReverse(list: LinkedListNode | null): boolean {
   const length = getLength(list);
 
   if (length <= 1) {
@@ -66,40 +67,35 @@ export function isPalindromeReverse(list: any) {
   let mid;
   for (let i = half; i > 0; --i) {
     mid = node;
-    node = node.next;
+    node = node?.next || null;
   }
 
-  if ((length % 2) === 1) {
+  if (length % 2 === 1) {
     mid = node;
-    node = node.next;
+    node = node?.next || null;
   }
 
-  let tail = reverse(node, mid);
+  let tail = reverse(node, mid || null);
   let isPalindrome = true;
   let prev = null;
-  let next;
+  let next: LinkedListNode | null;
   // now walk from start to middle and end to middle comparing values
   node = list;
   for (let i = half; i > 0; --i) {
-    isPalindrome = isPalindrome && node.val === tail.val;
-    next = tail.next;
-    tail.next = prev;
+    isPalindrome = isPalindrome && node?.val === tail?.val;
+    next = tail?.next || null;
+
+    if (tail) {
+      tail.next = prev;
+    }
+
     prev = tail;
-    tail = next;
-    node = node.next;
+
+    if (tail) {
+      tail = next;
+    }
+    node = node?.next || null;
   }
 
   return isPalindrome;
-}
-
-function reverse(node: any, end: any) {
-  let prev = end;
-  let next;
-  while (node) {
-    next = node.next;
-    node.next = prev;
-    prev = node;
-    node = next;
-  }
-  return prev;
 }
