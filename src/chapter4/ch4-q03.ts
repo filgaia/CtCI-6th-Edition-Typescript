@@ -1,4 +1,4 @@
-import { LinkedList } from './helpers';
+import { LinkedList, TreeNode, Tree } from './helpers';
 
 /**
  * Travels through tree and adds values into a list of linked lists. Each level
@@ -8,13 +8,13 @@ import { LinkedList } from './helpers';
  * Time: O(N)
  * Additional space: O(N)
  */
-export function listTreeByDepthOrder(tree: any) {
-  const lists: any = [];
+export function listTreeByDepthOrder(tree: Tree): LinkedList[] {
+  const lists: LinkedList[] = [];
   addToList(lists, tree.root, 0);
   return lists;
 }
 
-function addToList(lists: any, node: any, depth: any) {
+function addToList(lists: LinkedList[], node: TreeNode | null, depth: number): void {
   if (node) {
     if (!lists[depth]) {
       lists[depth] = new LinkedList();

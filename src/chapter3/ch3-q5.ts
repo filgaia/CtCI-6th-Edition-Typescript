@@ -9,34 +9,34 @@
  * Additional space: O(1) - while there are 2 stacks there are only a fixed
  * number of items.
  */
-export function sortStack(stack: any) {
-  const temp = [];
-  temp.push(stack.pop());
+export function sortStack(stack: number[]): number[] {
+  const temp: number[] = [];
+  temp.push(stack.pop()!);
   while (!isEmpty(stack)) {
-    const curr = stack.pop();
+    const curr = stack.pop()!;
     let count = 0;
 
     while (!isEmpty(temp) && curr < peek(temp)) {
-      stack.push(temp.pop());
+      stack.push(temp.pop()!);
       ++count;
     }
     temp.push(curr);
     for (let i = 0; i < count; ++i) {
-      temp.push(stack.pop());
+      temp.push(stack.pop()!);
     }
   }
 
   while (!isEmpty(temp)) {
-    stack.push(temp.pop());
+    stack.push(temp.pop()!);
   }
 
   return stack;
 }
 
-function peek(stack: any) {
+function peek(stack: number[]): number {
   return stack[stack.length - 1];
 }
 
-function isEmpty(stack: any) {
+function isEmpty(stack: number[]): boolean {
   return stack.length === 0;
 }

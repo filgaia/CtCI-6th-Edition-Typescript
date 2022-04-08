@@ -1,3 +1,5 @@
+import { ICache, Tree, TreeNode } from './helpers';
+
 /**
  * This function attempts to check if the tree is completely balanced by finding
  * the shortest and longest paths from root to leaf. If the difference between
@@ -8,13 +10,13 @@
  * Additional space: O(lg N) - space cost is due to call stack size while using
  * recursion, this may be O(N) in the worst case.
  */
-export function isBalanced(tree: any) {
+export function isBalanced(tree: Tree): boolean {
   if (!tree || !tree.root) {
     return true;
   }
 
   const node = tree.root;
-  const cache = {
+  const cache: ICache = {
     min: Number.MAX_SAFE_INTEGER,
     max: Number.MIN_SAFE_INTEGER,
   };
@@ -23,7 +25,7 @@ export function isBalanced(tree: any) {
   return cache.max - cache.min <= 1;
 }
 
-function findDepth(cache: any, node: any, depth: any) {
+function findDepth(cache: ICache, node: TreeNode | null, depth: number): void {
   if (!node) {
     if (depth < cache.min) {
       cache.min = depth;

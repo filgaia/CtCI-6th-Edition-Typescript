@@ -1,3 +1,5 @@
+import { Animal } from './ch3-models';
+
 /**
  * Uses two different queues one for dogs and one for cats. Each entry is
  * assigned a unique identifier which allows dequeueAny to determine which of
@@ -9,9 +11,9 @@
  * Additional space required to hold unique id per animal.
  */
 export class AnimalShelter {
-  private _dogs: any[];
+  private _dogs: Animal[];
 
-  private _cats: any[];
+  private _cats: Animal[];
 
   private _id: number;
 
@@ -21,38 +23,38 @@ export class AnimalShelter {
     this._id = 0;
   }
 
-  enqueueCat(name: string) {
+  enqueueCat(name: string): void {
     this._cats.push({
       name,
       id: ++this._id,
     });
   }
 
-  enqueueDog(name: string) {
+  enqueueDog(name: string): void {
     this._dogs.push({
       name,
       id: ++this._id,
     });
   }
 
-  dequeueAny() {
+  dequeueAny(): string | undefined {
     const dogId = this._dogs.length > 0 ? this._dogs[0].id : Number.POSITIVE_INFINITY;
     const catId = this._cats.length > 0 ? this._cats[0].id : Number.POSITIVE_INFINITY;
 
     if (dogId !== Number.POSITIVE_INFINITY || catId !== Number.POSITIVE_INFINITY) {
       if (dogId < catId) {
-        return this._dogs.shift().name;
+        return this._dogs.shift()?.name;
       }
 
-      return this._cats.shift().name;
+      return this._cats.shift()?.name;
     }
   }
 
-  dequeueCat() {
-    return this._cats.shift().name;
+  dequeueCat(): string | undefined {
+    return this._cats.shift()?.name;
   }
 
-  dequeueDog() {
-    return this._dogs.shift().name;
+  dequeueDog(): string | undefined {
+    return this._dogs.shift()?.name;
   }
 }

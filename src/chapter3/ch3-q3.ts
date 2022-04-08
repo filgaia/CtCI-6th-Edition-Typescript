@@ -10,11 +10,11 @@
  * Additional space: push O(1), pop O(1), popAt O(M)
  */
 export class StackOfStacks {
-  stacks: any[];
+  stacks: number[][];
 
-  max: any[];
+  max: number;
 
-  constructor(maxSize: any) {
+  constructor(maxSize: number) {
     if (arguments.length < 1) {
       throw new Error('maxSize argument is required');
     }
@@ -22,22 +22,22 @@ export class StackOfStacks {
     this.max = maxSize;
   }
 
-  push(value: any) {
+  push(value: number): void {
     if (this.stacks[this.stacks.length - 1].length >= this.max) {
       this.stacks.push([]);
     }
     this.stacks[this.stacks.length - 1].push(value);
   }
 
-  pop() {
-    const value = this.stacks[this.stacks.length - 1].pop();
+  pop(): number {
+    const value = this.stacks[this.stacks.length - 1].pop()!;
     if (this.stacks.length > 1 && this.stacks[this.stacks.length - 1].length === 0) {
       this.stacks.pop();
     }
     return value;
   }
 
-  popAt(number: number) {
+  popAt(number: number): number {
     if (number < 1 || number > this.stacks.length) {
       throw new Error('stack number is invalid');
     }
@@ -59,9 +59,9 @@ export class StackOfStacks {
         while (nextStack.length > 0) {
           tempStack.push(nextStack.pop());
         }
-        stack.push(tempStack.pop());
+        stack.push(tempStack.pop()!);
         while (tempStack.length > 0) {
-          nextStack.push(tempStack.pop());
+          nextStack.push(tempStack.pop()!);
         }
         stack = nextStack;
       }
@@ -71,6 +71,6 @@ export class StackOfStacks {
       this.stacks.pop();
     }
 
-    return value;
+    return value!;
   }
 }

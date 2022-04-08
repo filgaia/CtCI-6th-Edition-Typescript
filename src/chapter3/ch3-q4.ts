@@ -10,28 +10,28 @@
  * Additional space: O(N) - to hold the input items
  */
 export class MyQueue {
-  eStack: any[];
+  eStack: number[];
 
-  dStack: any[];
+  dStack: number[];
 
   constructor() {
     this.eStack = [];
     this.dStack = [];
   }
 
-  enqueue(value: any) {
+  enqueue(value: number): void {
     this.eStack.push(value);
   }
 
-  dequeue() {
+  dequeue(): number {
     if (this.dStack.length === 0 && this.eStack.length === 0) {
       throw new Error('queue is empty');
     }
     if (this.dStack.length === 0) {
       while (this.eStack.length > 0) {
-        this.dStack.push(this.eStack.pop());
+        this.dStack.push(this.eStack.pop()!);
       }
     }
-    return this.dStack.pop();
+    return this.dStack.pop()!;
   }
 }

@@ -9,7 +9,7 @@ for (const key in classes) {
       this.stack = new Stack(4);
     });
 
-    it('constructor throws error when maxSize isnt passed in', () => {
+    it("constructor throws error when maxSize isn't passed in", () => {
       expect(() => new Stack()).to.throw('maxSize argument is required');
     });
 

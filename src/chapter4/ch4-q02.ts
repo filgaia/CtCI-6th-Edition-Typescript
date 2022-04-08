@@ -10,7 +10,7 @@ import { Tree } from './helpers';
  * Time: O(N lg N)
  * Additional space: O(N)
  */
-export function makeBalancedTree(values: any) {
+export function makeBalancedTree(values: number[]): Tree {
   const tree = new Tree();
   if (values && values.length) {
     add(tree, values, 0, values.length - 1);
@@ -18,7 +18,7 @@ export function makeBalancedTree(values: any) {
   return tree;
 }
 
-function add(tree: any, values: any, start: any, end: any) {
+function add(tree: Tree, values: number[], start: number, end: number): void {
   if (start === end) {
     tree.add(values[start]);
   } else if (start < end) {

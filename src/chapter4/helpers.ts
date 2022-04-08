@@ -1,38 +1,45 @@
-class TreeNode {
-  val: any;
+export interface ICache {
+  min: number;
+  max: number;
+}
 
-  parent: any;
+export class TreeNode {
+  val: number;
 
-  left: any;
+  parent: TreeNode | null;
 
-  right: any;
+  left: TreeNode | null;
 
-  constructor(value: any) {
+  right: TreeNode | null;
+
+  [key: string]: TreeNode | number | null;
+
+  constructor(value: number) {
     this.val = value;
     this.parent = this.left = this.right = null;
   }
 }
 
 export class Tree {
-  root: any;
+  root: TreeNode | null;
 
   constructor() {
     this.root = null;
   }
 
-  add(value: any) {
+  add(value: number): void {
     const node = new TreeNode(value);
     if (!this.root) {
       this.root = node;
     } else {
       let n = this.root;
-      let branch: any;
+      let branch = '';
       while (n) {
         branch = value < n.val ? 'left' : 'right';
         if (!n[branch]) {
           break;
         }
-        n = n[branch];
+        n = n[branch] as TreeNode;
       }
       node.parent = n;
       n[branch] = node;
@@ -41,26 +48,26 @@ export class Tree {
 }
 
 class LinkedListNode {
-  val: any;
+  val: number;
 
-  next: any;
+  next: LinkedListNode | null;
 
-  constructor(value: any, next?: any) {
+  constructor(value: number, next?: LinkedListNode) {
     this.val = value;
     this.next = next || null;
   }
 }
 
 export class LinkedList {
-  head: any;
+  head: LinkedListNode | null;
 
-  tail: any;
+  tail: LinkedListNode | null;
 
   constructor() {
     this.head = this.tail = null;
   }
 
-  prepend(value: any) {
+  prepend(value: number): void {
     if (!this.head) {
       this.head = this.tail = new LinkedListNode(value);
     } else {
@@ -68,15 +75,18 @@ export class LinkedList {
     }
   }
 
-  append(value: any) {
+  append(value: number): void {
     if (!this.head) {
       this.head = this.tail = new LinkedListNode(value);
     } else {
-      this.tail = this.tail.next = new LinkedListNode(value);
+      if (this.tail) {
+        this.tail.next = new LinkedListNode(value);
+      }
+      this.tail = this.tail?.next || null;
     }
   }
 
-  toArray() {
+  toArray(): number[] {
     const arr = [];
     let node = this.head;
     while (node) {
@@ -87,7 +97,7 @@ export class LinkedList {
   }
 }
 
-function findDepth(cache: any, node: any, depth: any) {
+function findDepth(cache: ICache, node: TreeNode, depth: number): void {
   if (!node) {
     if (depth < cache.min) {
       cache.min = depth;
@@ -96,12 +106,12 @@ function findDepth(cache: any, node: any, depth: any) {
       cache.max = depth;
     }
   } else {
-    findDepth(cache, node.left, depth + 1);
-    findDepth(cache, node.right, depth + 1);
+    findDepth(cache, node.left!, depth + 1);
+    findDepth(cache, node.right!, depth + 1);
   }
 }
 
-export function isBalanced(tree: any) {
+export function isBalanced(tree: Tree): boolean {
   if (!tree || !tree.root) {
     return true;
   }
