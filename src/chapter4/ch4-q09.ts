@@ -1,3 +1,5 @@
+import { Tree, TreeNode } from './helpers';
+
 /**
  * The basic premise here is to get all permutations of each subtree's left and
  * right children. Then create a new list of all the permutations from combining
@@ -5,7 +7,7 @@
  * new set of permutations all need to be prefixed with the current nodes value
  * as it must be added before its left or right children.
  *
- * The process of creating permutations requires combinging a list from the set
+ * The process of creating permutations requires combining a list from the set
  * of left child permutations and those of the right child. Each permutation
  * needs to keep the items in their relative lists from their source lists.
  *
@@ -16,14 +18,14 @@
  * Additional space: O(N!) - again like the time complexity this is a high upper
  * bound
  */
-export function sequencesToCreateBST(tree: any) {
+export function sequencesToCreateBST(tree: Tree) {
   if (!tree || !tree.root) {
     return null;
   }
   return sequencesRecursive(tree.root);
 }
 
-function sequencesRecursive(node: any) {
+function sequencesRecursive(node: TreeNode | null): number[][] | null {
   if (!node) {
     return null;
   }
@@ -37,7 +39,7 @@ function sequencesRecursive(node: any) {
   return perms;
 }
 
-function permutations(left: any, right: any) {
+function permutations(left: number[][] | null, right: number[][] | null): number[][] | null {
   if (!left || !right) {
     return left || right;
   }
@@ -52,10 +54,10 @@ function permutations(left: any, right: any) {
 }
 
 function permutationsRecursive(
-  perms: any,
-  list1: any,
-  list2: any,
-  prefix: any,
+  perms: number[][],
+  list1: number[],
+  list2: number[],
+  prefix: number[],
   i: number,
   j: number,
 ) {

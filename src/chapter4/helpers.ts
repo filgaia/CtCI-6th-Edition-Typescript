@@ -3,6 +3,10 @@ export interface ICache {
   max: number;
 }
 
+export interface IAdjacent {
+  [key: string]: number[];
+}
+
 export class TreeNode {
   val: number;
 
@@ -12,16 +16,26 @@ export class TreeNode {
 
   right: TreeNode | null;
 
+  size: number;
+
   [key: string]: TreeNode | number | null;
 
-  constructor(value: number) {
+  constructor(value: number, parent: TreeNode | null = null) {
     this.val = value;
-    this.parent = this.left = this.right = null;
+    this.left = this.right = null;
+    this.parent = parent;
+    this.size = 1; // including itself
   }
 }
 
 export class Tree {
   root: TreeNode | null;
+
+  [key: string]:
+    | TreeNode
+    | null
+    | ((value: number) => void)
+    | ((node: TreeNode | null, parentBranch: string, value: number) => boolean);
 
   constructor() {
     this.root = null;

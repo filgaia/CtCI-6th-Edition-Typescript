@@ -1,3 +1,5 @@
+import { TreeNode } from './helpers';
+
 /**
  * Finding the successor as a few different scenarios:
  *   1. Where a right child exists:
@@ -13,7 +15,7 @@
  * Time: O(lg N) - assumes balanced tree, worst cast O(N)
  * Additional space: O(1)
  */
-export function findSuccessor(node: any) {
+export function findSuccessor(node: TreeNode): number | undefined {
   if (!node) {
     throw new Error('node cannot be null');
   }

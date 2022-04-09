@@ -1,21 +1,4 @@
-class Node {
-  left: any;
-
-  right: any;
-
-  parent: any;
-
-  val: any;
-
-  size: number;
-
-  constructor(value: any, parent: any) {
-    this.left = this.right = null;
-    this.parent = parent || null;
-    this.val = value;
-    this.size = 1; // including itself
-  }
-}
+import { Tree, TreeNode } from './helpers';
 
 /**
  * RandomNode routine first gets a random number between 1 and the number of
@@ -37,51 +20,58 @@ class Node {
  * Additional space: insert O(N) - to hold values and keep track of subtree sizes
  * delete O(lg N), find O(1), randomNode O(1)
  */
-export class RandomBinarySearchTree {
-  root: any;
+export class RandomBinarySearchTree extends Tree {
+  root: TreeNode | null;
 
   constructor() {
+    super();
     this.root = null;
   }
 
-  insert(value: any) {
-    let node = this;
+  insert(value: number): void {
+    let node: Tree | TreeNode = this;
     let branch = 'root';
     while (node[branch]) {
-      node = node[branch];
+      node = node[branch] as TreeNode;
       ++node.size;
       branch = value < node.val ? 'left' : 'right';
     }
-    node[branch] = new Node(value, node);
+    node[branch] = new TreeNode(value, node as TreeNode);
   }
 
-  delete(value: any) {
+  delete(value: number): boolean {
     return this._deleteRecursive(this.root, 'root', value);
   }
 
-  _deleteRecursive(node: any, parentBranch: any, value: any): any {
+  _deleteRecursive(node: TreeNode | null, parentBranch: string, value: number): boolean {
     if (node) {
       if (node.val === value) {
         if (!node.left && !node.right) {
-          node.parent[parentBranch] = null;
+          if (node?.parent) {
+            node.parent[parentBranch] = null;
+          }
           return true;
         }
         if (node.left && !node.right) {
-          node.parent[parentBranch] = node.left;
+          if (node?.parent) {
+            node.parent[parentBranch] = node.left;
+          }
           return true;
         }
         if (!node.left && node.right) {
-          node.parent[parentBranch] = node.right;
+          if (node?.parent) {
+            node.parent[parentBranch] = node.right;
+          }
           return true;
         }
 
         let minNode = node.right;
-        while (minNode.left) {
+        while (minNode?.left) {
           minNode = minNode.left;
         }
-        node.val = minNode.val;
+        node.val = minNode?.val || 0;
         --node.size;
-        return this._deleteRecursive(node.right, 'right', minNode.val);
+        return this._deleteRecursive(node.right, 'right', minNode?.val || 0);
       }
 
       const branch = value < node.val ? 'left' : 'right';
@@ -94,7 +84,7 @@ export class RandomBinarySearchTree {
     return false;
   }
 
-  find(value: any) {
+  find(value: number): TreeNode | undefined {
     let node = this.root;
     let branch;
     while (node) {
@@ -102,12 +92,12 @@ export class RandomBinarySearchTree {
         return node;
       }
       branch = value < node.val ? 'left' : 'right';
-      node = node[branch];
+      node = node[branch] as TreeNode;
     }
     return undefined;
   }
 
-  randomNode() {
+  randomNode(): TreeNode | undefined {
     if (!this.root) {
       return undefined;
     }

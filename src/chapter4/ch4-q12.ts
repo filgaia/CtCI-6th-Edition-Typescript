@@ -1,3 +1,5 @@
+import { Tree, TreeNode } from './helpers';
+
 /**
  * To find all the paths where node values add up to a given sum we need to
  * travel all paths of the tree and basically look upwards from the current node
@@ -9,7 +11,7 @@
  * Time: O(N lg N) - assuming a balanced tree, worst case O(N^2)
  * Additional space: O(lg N) - assuming a balanced tree, worst case O(N)
  */
-export function findPathWithSum(tree: any, value: any) {
+export function findPathWithSum(tree: Tree, value: number): number {
   if (!tree || !tree.root) {
     throw new Error('tree must be valid and non-empty');
   }
@@ -17,7 +19,7 @@ export function findPathWithSum(tree: any, value: any) {
   return findPathWithSumRecurse([], tree.root, value);
 }
 
-function findPathWithSumRecurse(path: any, node: any, value: any) {
+function findPathWithSumRecurse(path: number[], node: TreeNode | null, value: number): number {
   let count = 0;
   if (node) {
     path.push(node.val);
@@ -28,8 +30,9 @@ function findPathWithSumRecurse(path: any, node: any, value: any) {
         ++count;
       }
     }
-    count += findPathWithSumRecurse(path, node.left, value)
-      + findPathWithSumRecurse(path, node.right, value);
+    count +=
+      findPathWithSumRecurse(path, node?.left, value) +
+      findPathWithSumRecurse(path, node?.right, value);
     path.pop();
   }
   return count;

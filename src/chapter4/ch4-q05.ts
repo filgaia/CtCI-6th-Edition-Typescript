@@ -1,3 +1,5 @@
+import { Tree, TreeNode } from './helpers';
+
 /**
  * To check if a tree is a valid BST we need to check that all the values under
  * a node are within the ranges defined by the path we took to get there. For
@@ -11,20 +13,22 @@
  * Additional space: O(lg N) - due to recursion. Assumes a balanced tree, worst
  * case is O(N)
  */
-export function isValidBST(tree: any) {
+export function isValidBST(tree: Tree): boolean {
   if (!tree) {
     throw new Error('invalid tree');
   }
   return isValidBSTRecursive(tree.root, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY);
 }
 
-function isValidBSTRecursive(node: any, min: any, max: any): any {
+function isValidBSTRecursive(node: TreeNode | null, min: number, max: number): boolean {
   if (node) {
     if (node.val < min || node.val > max) {
       return false;
     }
-    return isValidBSTRecursive(node.left, min, node.val)
-      && isValidBSTRecursive(node.right, node.val, max);
+    return (
+      isValidBSTRecursive(node.left, min, node.val) &&
+      isValidBSTRecursive(node.right, node.val, max)
+    );
   }
   return true;
 }

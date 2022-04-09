@@ -1,7 +1,7 @@
 import lint from 'mocha-eslint';
 
 // Array of paths to lint
-// Note: a seperate Mocha test will be run for each path and each file which
+// Note: a separate Mocha test will be run for each path and each file which
 // matches a glob pattern
 const paths = [
   'src/**/*.ts',
@@ -10,7 +10,7 @@ const paths = [
 // Specify style of output
 const options = {
   formatter: 'compact',
-  timeout: 10000,
+  timeout: 15000,
 };
 
 // Only display warnings if a test is failing
