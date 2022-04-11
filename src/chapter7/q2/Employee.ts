@@ -20,7 +20,7 @@ export class Employee {
   receiveCall(call: any): void {
     this.currentCall = call;
 
-    setTimeout(() => this.callCompleted(), 3000);
+    setTimeout(() => this.callCompleted(), 0); // 3000 usually. 0 for testing purposes
   }
 
   /* the issue is resolved, finish the call */

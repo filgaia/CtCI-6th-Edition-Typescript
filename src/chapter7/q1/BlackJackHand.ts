@@ -1,5 +1,5 @@
-import { BlackJackCard } from './BlackJackCard.js';
-import { Hand } from './Hand.js';
+import { BlackJackCard } from './BlackJackCard';
+import { Hand } from './Hand';
 
 export class BlackJackHand extends Hand {
   cards: BlackJackCard[] = [];

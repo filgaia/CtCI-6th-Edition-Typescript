@@ -1,7 +1,7 @@
-import { ISuit, Suit } from './Suit.js';
-import { Deck } from './Deck.js';
-import { BlackJackHand } from './BlackJackHand.js';
-import { BlackJackCard } from './BlackJackCard.js';
+import { ISuit, Suit } from './Suit';
+import { Deck } from './Deck';
+import { BlackJackHand } from './BlackJackHand';
+import { BlackJackCard } from './BlackJackCard';
 
 export class BlackJackGameAutomaton {
   deck: Deck | undefined;

@@ -1,5 +1,5 @@
-import { Card } from './Card.js';
-import { Suit } from './Suit.js';
+import { Card } from './Card';
+import { Suit } from './Suit';
 
 export class BlackJackCard extends Card {
   faceValue: number = 0;

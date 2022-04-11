@@ -1,4 +1,4 @@
-import { Suit } from './Suit.js';
+import { Suit } from './Suit';
 
 export class Card {
   available: boolean;
@@ -31,7 +31,10 @@ export class Card {
 
   print(): void {
     const faceValues = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-    process.stdout.write(faceValues[this.faceValue! - 1]);
+
+    if (this.faceValue && this.faceValue > 0) {
+      process.stdout.write(faceValues[this.faceValue - 1]);
+    }
     switch (this.suit) {
       case Suit.Club:
         process.stdout.write('c');
