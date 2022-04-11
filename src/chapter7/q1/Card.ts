@@ -1,37 +1,37 @@
-import {
-  Suit,
-} from './Suit.js';
+import { Suit } from './Suit.js';
 
 export class Card {
-  available: any;
+  available: boolean;
 
-  faceValue: any;
+  faceValue?: number;
 
-  constructor(c?: any, s?: any) {
+  suit: any;
+
+  constructor(c?: number, s?: typeof Suit) {
     this.available = true;
     this.faceValue = c;
     this.suit = s;
   }
 
-  suit() {
+  getSuit(): typeof Suit {
     return this.suit;
   }
 
-  isAvailable() {
+  isAvailable(): boolean {
     return this.available;
   }
 
-  markUnavailable() {
+  markUnavailable(): void {
     this.available = false;
   }
 
-  markAvailable() {
+  markAvailable(): void {
     this.available = true;
   }
 
-  print() {
+  print(): void {
     const faceValues = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-    process.stdout.write(faceValues[this.faceValue - 1]);
+    process.stdout.write(faceValues[this.faceValue! - 1]);
     switch (this.suit) {
       case Suit.Club:
         process.stdout.write('c');

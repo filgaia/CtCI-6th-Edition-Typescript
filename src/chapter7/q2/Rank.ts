@@ -1,18 +1,19 @@
 export const Rank = {
-  value: undefined,
-  get Responder() {
+  value: -1,
+
+  get Responder(): number {
     this.value = 0;
     return this.value;
   },
-  get Manager() {
+  get Manager(): number {
     this.value = 1;
     return this.value;
   },
-  get Director() {
+  get Director(): number {
     this.value = 2;
     return this.value;
   },
-  getValue() {
+  getValue(): number {
     return this.value;
   },
 };

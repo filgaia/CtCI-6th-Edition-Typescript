@@ -5,7 +5,7 @@
 export class Employee {
   currentCall: any;
 
-  rank: any;
+  rank?: number;
 
   callHandler: any;
 
@@ -17,14 +17,14 @@ export class Employee {
   }
 
   /* Start the conversation */
-  receiveCall(call: any) {
+  receiveCall(call: any): void {
     this.currentCall = call;
 
     setTimeout(() => this.callCompleted(), 3000);
   }
 
   /* the issue is resolved, finish the call */
-  callCompleted() {
+  callCompleted(): void {
     if (this.currentCall !== null) {
       /* Disconnect the call. */
       this.currentCall.disconnect();
@@ -41,7 +41,7 @@ export class Employee {
    * The issue has not been resolved. Escalate the call, and assign a new call
    * to the employee.
    */
-  escalateAndReassign() {
+  escalateAndReassign(): void {
     if (this.currentCall !== null) {
       /* esthis.calate call */
       this.currentCall.incrementRank();
@@ -56,7 +56,7 @@ export class Employee {
   }
 
   /* Assign a new call to an employee, if the employee is free. */
-  assignNewCall() {
+  assignNewCall(): boolean {
     if (!this.isFree()) {
       return false;
     }
@@ -64,11 +64,11 @@ export class Employee {
   }
 
   /* Returns whether or not the employee is free. */
-  isFree() {
+  isFree(): boolean {
     return this.currentCall === null;
   }
 
-  getRank() {
+  getRank(): number | undefined {
     return this.rank;
   }
 }

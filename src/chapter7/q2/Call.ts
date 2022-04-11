@@ -1,13 +1,14 @@
+import { Caller } from './Caller';
 import { Rank } from './Rank';
 
 export class Call {
-  rank: any;
+  rank: number;
 
-  caller: any;
+  caller: AnimationPlaybackEvent | Caller;
 
   handler: any;
 
-  constructor(c: AnimationPlaybackEvent) {
+  constructor(c: AnimationPlaybackEvent | Caller) {
     /* Minimal rank of employee who can handle this call. */
     this.rank = Rank.Responder;
 
@@ -19,24 +20,24 @@ export class Call {
   }
 
   /* Set employee who is handling call. */
-  setHandler(e: any) {
+  setHandler(e: any): void {
     this.handler = e;
   }
 
   /* Play recorded message to the customer. */
-  reply(message: any) {
+  reply(message: string): void {
     console.log(message);
   }
 
-  getRank() {
+  getRank(): number {
     return this.rank;
   }
 
-  setRank(r: any) {
+  setRank(r: number): void {
     this.rank = r;
   }
 
-  incrementRank() {
+  incrementRank(): number {
     if (this.rank === Rank.Responder) {
       this.rank = Rank.Manager;
     } else if (this.rank === Rank.Manager) {
@@ -46,7 +47,7 @@ export class Call {
   }
 
   /* Disconnect call. */
-  disconnect() {
+  disconnect(): void {
     this.reply('Thank you for calling');
   }
 }

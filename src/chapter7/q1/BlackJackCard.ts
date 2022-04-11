@@ -1,42 +1,42 @@
-import {
-  Card,
-} from './Card.js';
+import { Card } from './Card.js';
+import { Suit } from './Suit.js';
 
 export class BlackJackCard extends Card {
-  faceValue: any;
+  faceValue: number = 0;
 
-  constructor(c: any, s: any) {
+  constructor(c: number, s: typeof Suit) {
     super(c, s);
   }
 
-  value() {
+  value(): number {
     if (this.isAce()) {
       return 1;
-    } if (this.faceValue >= 11 && this.faceValue <= 13) {
+    }
+    if (this.faceValue >= 11 && this.faceValue <= 13) {
       return 10;
     }
     return this.faceValue;
   }
 
-  minValue() {
+  minValue(): number {
     if (this.isAce()) {
       return 1;
     }
     return this.value();
   }
 
-  maxValue() {
+  maxValue(): number {
     if (this.isAce()) {
       return 11;
     }
     return this.value();
   }
 
-  isAce() {
+  isAce(): boolean {
     return this.faceValue === 1;
   }
 
-  isFaceCard() {
+  isFaceCard(): boolean {
     return this.faceValue >= 11 && this.faceValue <= 13;
   }
 }

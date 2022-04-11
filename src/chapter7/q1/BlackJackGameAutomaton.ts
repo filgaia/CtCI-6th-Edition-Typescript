@@ -1,24 +1,16 @@
-import {
-  Suit,
-} from './Suit.js';
-import {
-  Deck,
-} from './Deck.js';
-import {
-  BlackJackHand,
-} from './BlackJackHand.js';
-import {
-  BlackJackCard,
-} from './BlackJackCard.js';
+import { ISuit, Suit } from './Suit.js';
+import { Deck } from './Deck.js';
+import { BlackJackHand } from './BlackJackHand.js';
+import { BlackJackCard } from './BlackJackCard.js';
 
-export class BlackJackGameAutomator {
-  deck: any;
+export class BlackJackGameAutomaton {
+  deck: Deck | undefined;
 
-  hands: any;
+  hands: BlackJackHand[];
 
-  _HIT_UNTIL: any;
+  static _HIT_UNTIL: number = 16;
 
-  constructor(numPlayers: any) {
+  constructor(numPlayers: number) {
     this.deck = undefined;
 
     this.hands = [];
@@ -27,15 +19,10 @@ export class BlackJackGameAutomator {
     }
   }
 
-  // underscore for psuedo private
-  static get _HIT_UNTIL() {
-    return 16;
-  }
-
-  dealInitial() {
-    this.hands.forEach((hand: any) => {
-      const card1 = this.deck.dealCard();
-      const card2 = this.deck.dealCard();
+  dealInitial(): boolean {
+    this.hands.forEach((hand: BlackJackHand) => {
+      const card1 = this.deck?.dealCard();
+      const card2 = this.deck?.dealCard();
       if (card1 === null || card2 === null) {
         return false;
       }
@@ -45,7 +32,7 @@ export class BlackJackGameAutomator {
     return true;
   }
 
-  getBlackJacks() {
+  getBlackJacks(): number[] {
     const winners = [];
     for (let i = 0; i < this.hands.length; i++) {
       if (this.hands[i].isBlackJack()) {
@@ -55,14 +42,14 @@ export class BlackJackGameAutomator {
     return winners;
   }
 
-  playHandIndex(i: any) {
+  playHandIndex(i: number): boolean {
     const hand = this.hands[i];
     return this.playHand(hand);
   }
 
-  playHand(hand: any) {
-    while (hand.score() < this._HIT_UNTIL) {
-      const card = this.deck.dealCard();
+  playHand(hand: BlackJackHand): boolean {
+    while (hand.score() < BlackJackGameAutomaton._HIT_UNTIL) {
+      const card = this.deck?.dealCard();
       if (card === null) {
         return false;
       }
@@ -71,7 +58,7 @@ export class BlackJackGameAutomator {
     return true;
   }
 
-  playAllHands() {
+  playAllHands(): boolean {
     this.hands.forEach((hand: any) => {
       if (!this.playHand(hand)) {
         return false;
@@ -80,7 +67,7 @@ export class BlackJackGameAutomator {
     return true;
   }
 
-  getWinners() {
+  getWinners(): number[] {
     let winners = [];
     let winningScore = 0;
     for (let i = 0; i < this.hands.length; i++) {
@@ -98,11 +85,11 @@ export class BlackJackGameAutomator {
     return winners;
   }
 
-  initializeDeck() {
+  initializeDeck(): void {
     const cards = [];
     for (let i = 1; i <= 13; i++) {
       for (let j = 0; j <= 3; j++) {
-        const suit = Suit.getSuitFromValue(j);
+        const suit: ISuit = Suit.getSuitFromValue(j);
         const card = new BlackJackCard(i, suit);
         cards.push(card);
       }
@@ -113,7 +100,7 @@ export class BlackJackGameAutomator {
     this.deck.shuffle();
   }
 
-  printHandsAndScore() {
+  printHandsAndScore(): void {
     this.hands.forEach((hand: any, i: any) => {
       process.stdout.write(`Hand ${i} (${hand.score()}): `);
       hand.print();

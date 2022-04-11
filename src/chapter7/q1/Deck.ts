@@ -1,26 +1,28 @@
-export class Deck {
-  dealtIndex: any;
+import { Card } from './Card';
 
-  cards: any;
+export class Deck {
+  dealtIndex: number;
+
+  cards: Card[];
 
   constructor() {
     this.dealtIndex = 0;
     this.cards = [];
   }
 
-  setDeckOfCards(deckOfCards: any) {
+  setDeckOfCards(deckOfCards: Card[]): void {
     this.cards = deckOfCards;
   }
 
-  randomInt(n: number) {
+  randomInt(n: number): number {
     return Math.round(Math.random() * n);
   }
 
-  randomIntInRange(min: number, max: number) {
+  randomIntInRange(min: number, max: number): number {
     return this.randomInt(max + 1 - min) + min;
   }
 
-  shuffle() {
+  shuffle(): void {
     for (let i = 0; i < this.cards.length; i++) {
       const j = this.randomIntInRange(i, this.cards.length - i - 1);
 
@@ -32,7 +34,7 @@ export class Deck {
     }
   }
 
-  remainingCards() {
+  remainingCards(): number {
     return this.cards.length - this.dealtIndex;
   }
 
@@ -54,7 +56,7 @@ export class Deck {
     return hand;
   }
 
-  dealCard() {
+  dealCard(): Card | null {
     if (this.remainingCards() === 0) {
       return null;
     }
@@ -65,7 +67,7 @@ export class Deck {
     return card;
   }
 
-  print() {
+  print(): void {
     this.cards.forEach((card: any) => card.print());
   }
 }

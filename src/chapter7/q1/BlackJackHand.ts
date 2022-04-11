@@ -1,11 +1,10 @@
-import {
-  Hand,
-} from './Hand.js';
+import { BlackJackCard } from './BlackJackCard.js';
+import { Hand } from './Hand.js';
 
 export class BlackJackHand extends Hand {
-  cards: any;
+  cards: BlackJackCard[] = [];
 
-  score() {
+  score(): number {
     const scores = this.possibleScores();
     let maxUnder = Number.MIN_VALUE;
     let minOver = Number.MAX_VALUE;
@@ -19,8 +18,8 @@ export class BlackJackHand extends Hand {
     return maxUnder === Number.MIN_VALUE ? minOver : maxUnder;
   }
 
-  possibleScores() {
-    const scores: any = [];
+  possibleScores(): number[] {
+    const scores: number[] = [];
     if (this.cards.length === 0) {
       return scores;
     }
@@ -30,7 +29,7 @@ export class BlackJackHand extends Hand {
     return scores;
   }
 
-  addCardToScoreList(card: any, scores: any) {
+  addCardToScoreList(card: BlackJackCard, scores: number[]): void {
     if (scores.length === 0) {
       scores.push(0);
     }
@@ -44,15 +43,15 @@ export class BlackJackHand extends Hand {
     }
   }
 
-  busted() {
+  busted(): boolean {
     return this.score() > 21;
   }
 
-  is21() {
+  is21(): boolean {
     return this.score() === 21;
   }
 
-  isBlackJack() {
+  isBlackJack(): boolean {
     if (this.cards.length !== 2) {
       return false;
     }

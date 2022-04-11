@@ -37,6 +37,7 @@
     "eqeqeq": 2,
     "func-names": "off", // Remove to warn
     "guard-for-in": "off",
+    "implicit-arrow-linebreak": "off",
     "import/prefer-default-export": "off",
     "max-classes-per-file": "off",
     "no-bitwise": "off",

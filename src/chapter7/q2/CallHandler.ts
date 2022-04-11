@@ -4,6 +4,7 @@ import { Caller } from './Caller';
 import { Respondent } from './Respondent';
 import { Manager } from './Manager';
 import { Director } from './Director';
+import { Employee } from './Employee';
 
 /* CallHandler represents the body of the program,
  * and all calls are funneled first through it.
@@ -16,9 +17,9 @@ const LEVELS = 3;
 const NUM_RESPONDENTS = 10;
 
 export class CallHandler {
-  employeeLevels: any[];
+  employeeLevels: Employee[][];
 
-  callQueues: any[];
+  callQueues: Call[][];
 
   constructor() {
     /* List of employees, by level.
@@ -53,7 +54,7 @@ export class CallHandler {
   }
 
   /* Gets the first available employee who can handle this call. */
-  getHandlerForCall(call: any) {
+  getHandlerForCall(call: Call): Employee | null {
     for (let level = call.getRank(); level < LEVELS - 1; level++) {
       const employeeLevel = this.employeeLevels[level];
       for (const emp of employeeLevel) {
@@ -66,15 +67,17 @@ export class CallHandler {
   }
 
   /* Routes the call to an available employee, or saves in a queue if no employee available. */
-  dispatchCall(callParam: any) {
-    let call = callParam;
+  dispatchCall(callParam: Caller | Call): void {
+    let call;
 
     if (callParam instanceof Caller) {
       call = new Call(callParam);
+    } else {
+      call = callParam;
     }
 
     /* Try to route the call to an employee with minimal rank. */
-    const emp = this.getHandlerForCall(call);
+    const emp = this.getHandlerForCall(call as Call);
     if (emp !== null) {
       emp.receiveCall(call);
       call.setHandler(emp);
@@ -87,9 +90,9 @@ export class CallHandler {
 
   /* An employee got free. Look for a waiting call that he/she can serve. Return true
    * if we were able to assign a call, false otherwise. */
-  assignCall(emp: any) {
+  assignCall(emp: Employee): boolean {
     /* Check the queues, starting from the highest rank this employee can serve. */
-    for (let rank = emp.getRank(); rank >= 0; rank--) {
+    for (let rank = emp.getRank()!; rank >= 0; rank--) {
       const que = this.callQueues[rank];
 
       /* Remove the first call, if any */

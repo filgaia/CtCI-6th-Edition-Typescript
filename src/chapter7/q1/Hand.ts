@@ -1,22 +1,25 @@
+import { BlackJackCard } from './BlackJackCard.js';
 import { Card } from './Card.js';
 
 export class Hand extends Card {
-  cards: any;
+  cards: BlackJackCard[];
 
   constructor() {
     super();
     this.cards = [];
   }
 
-  score() {
-    return this.cards.reduce((aggregate: any, card: any) => aggregate + card.value());
+  score(): BlackJackCard {
+    return this.cards.reduce(
+      (aggregate: BlackJackCard, card: BlackJackCard) => aggregate + card.value(),
+    );
   }
 
-  addCard(card: any) {
+  addCard(card: BlackJackCard): void {
     this.cards.push(card);
   }
 
   print() {
-    this.cards.forEach((card: any) => card.print());
+    this.cards.forEach((card: BlackJackCard) => card.print());
   }
 }
