@@ -5,22 +5,26 @@ data structure, it returns -1. (For this reason, the data structure only support
 positive integers.) Given a Listy which contains sorted, positive integers, find the
 index at which an element x occurs. If x occurs multiple times, you may return any index. */
 
-export function Listy(array: any) {
-  this._array = array;
-}
+export class Listy {
+  _array: number[];
 
-Listy.prototype.elementAt = function (index: number) {
-  if (index >= this._array.length) {
-    return -1;
+  constructor(array: number[]) {
+    this._array = array;
   }
 
-  return this._array[index];
-};
+  elementAt(index: number): number {
+    if (index >= this._array.length) {
+      return -1;
+    }
 
-export function findIndex(listy: any, x: any) {
+    return this._array[index];
+  }
+}
+
+export function findIndex(listy: Listy, x: number): number {
   // looking for borders of binary search
   let left = 0;
-  let right = 3 * left + 1;
+  let right = 1;
   while (listy.elementAt(right) !== -1 && listy.elementAt(right) < x) {
     left = right;
     right = 3 * left + 1;

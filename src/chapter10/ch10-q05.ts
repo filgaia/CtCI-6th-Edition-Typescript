@@ -1,7 +1,7 @@
 /* 10.5 Sparse Search: Given a sorted array of strings that is interspersed
 with empty strings, write a method to find the location of a given string. */
 
-export function findIndex(stringArray: string[], word: string) {
+export function findIndex(stringArray: string[], word: string): number {
   // saving word indexes in separate array
   const wordIndexes = [];
   for (let i = 0, len = stringArray.length; i < len; i++) {

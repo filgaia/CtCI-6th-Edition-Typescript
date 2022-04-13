@@ -6,7 +6,7 @@ for (const key in funcs) {
 
   describe(`ch7-q01: ${key}`, () => {
     it('game has been played', () => {
-      expect(func()).to.be.true;
+      expect(func(1)).to.be.equal('Draw. All players have busted.');
     });
   });
 }

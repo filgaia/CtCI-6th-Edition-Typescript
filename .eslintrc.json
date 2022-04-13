@@ -36,6 +36,7 @@
     "default-case": "off",
     "eqeqeq": 2,
     "func-names": "off", // Remove to warn
+    "function-paren-newline": "off",
     "guard-for-in": "off",
     "implicit-arrow-linebreak": "off",
     "import/prefer-default-export": "off",

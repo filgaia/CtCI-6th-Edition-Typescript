@@ -101,8 +101,8 @@ export class BlackJackGameAutomaton {
   }
 
   printHandsAndScore(): void {
-    this.hands.forEach((hand: any, i: any) => {
-      process.stdout.write(`Hand ${i} (${hand.score()}): `);
+    this.hands.forEach((hand: BlackJackHand, i: number) => {
+      console.log(`Hand ${i} (${hand.score()}): `);
       hand.print();
       console.log('');
     });

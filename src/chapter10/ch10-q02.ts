@@ -1,8 +1,10 @@
+import { Anagram } from './ch10-models';
+
 // 10.2 Group Anagrams:
 // Write a method to sort an array of strings so that all the anagrams are next to each other.
-
-export function groupAnagrams(A: any) {
-  const buckets: any[] = [];
+// time: O(n log(n))
+export function groupAnagrams(A: string[]): string[] {
+  const buckets: Anagram[] = [];
   for (let i = 0, len = A.length; i < len; i++) {
     const elementSorted = sortLetters(A[i]);
     const bucket = buckets.find((element) => elementSorted === element.sortedWord);
@@ -13,7 +15,7 @@ export function groupAnagrams(A: any) {
     }
   }
 
-  let result: any[] = [];
+  let result: string[] = [];
   for (let i = 0, len = buckets.length; i < len; i++) {
     result = result.concat(buckets[i].elements);
   }
@@ -21,6 +23,6 @@ export function groupAnagrams(A: any) {
   return result;
 }
 
-function sortLetters(word: string) {
+function sortLetters(word: string): string {
   return word.toLowerCase().split('').sort().join('');
 }
